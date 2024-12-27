@@ -13,14 +13,15 @@ export const metadata: Metadata = {
 };
 
 
-export default async function Page({
-    searchParams,
-}: {
-    searchParams?: {
-        query?: string;
-        page?: string;
-    };
-}) {
+export default async function Page(
+    props: {
+        searchParams?: Promise<{
+            query?: string;
+            page?: string;
+        }>;
+    }
+) {
+    const searchParams = await props.searchParams;
     console.log(`Estou na pagina inicial buscando de acordo com o ${searchParams?.query}`)
     const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
